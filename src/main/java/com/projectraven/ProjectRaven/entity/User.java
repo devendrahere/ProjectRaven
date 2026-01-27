@@ -1,6 +1,7 @@
 package com.projectraven.ProjectRaven.entity;
 
 
+import com.projectraven.ProjectRaven.emums.SystemRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,6 +30,10 @@ public class User extends BaseEntity{
 
         @Column(nullable = false, length = 30)
         private String name;
+
+        @Enumerated(EnumType.STRING)
+        @Column(name = "system_role", nullable = false, length = 20)
+        private SystemRole systemRole;
 
         protected User() {}
 }

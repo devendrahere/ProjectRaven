@@ -5,30 +5,32 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 
+import java.time.Instant;
+
 @MappedSuperclass
 public class BaseEntity {
     @Column(name="created_at", nullable=false, updatable=false)
-    private Long createdAt;
+    private Instant createdAt;
 
     @Column(name="updated_at", nullable=false)
-    private Long updatedAt;
+    private Instant updatedAt;
 
     @PrePersist
     protected void onCreate() {
-        long now = System.currentTimeMillis();
+        Instant now = Instant.now();
         this.createdAt = now;
         this.updatedAt = now;
     }
 
     @PreUpdate
     protected void onUpdate() {
-        this.updatedAt = System.currentTimeMillis();
+        this.updatedAt = Instant.now();
     }
 
-    public Long getCreatedAt() {
+    public Instant getCreatedAt() {
         return createdAt;
     }
-    public Long getUpdatedAt() {
+    public Instant getUpdatedAt() {
         return updatedAt;
     }
 }

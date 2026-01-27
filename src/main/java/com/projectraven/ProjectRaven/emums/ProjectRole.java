@@ -1,10 +1,12 @@
 package com.projectraven.ProjectRaven.emums;
 
 public enum ProjectRole {
-    ADMIN,
-    // has full access to all project features
+    OWNER,
+    //creator of the project with all permissions
+    MANAGER,
+    //can manage project settings and members
     DEVELOPER,
-    // can create and manage issues, but cannot change project settings
-    VIEWER,
-    // can only view project details and issues
+    //can work on issues and tasks
+    VIEWER
+    //read-only access to the project
 }

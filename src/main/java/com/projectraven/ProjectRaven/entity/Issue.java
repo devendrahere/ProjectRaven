@@ -1,5 +1,6 @@
 package com.projectraven.ProjectRaven.entity;
 
+import com.projectraven.ProjectRaven.emums.IssuePriority;
 import com.projectraven.ProjectRaven.emums.IssueStatus;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -30,7 +31,7 @@ public class Issue extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private IssueStatus priority;
+    private IssuePriority priority;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "project_id", nullable = false)
