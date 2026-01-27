@@ -1,17 +1,13 @@
 package com.projectraven.ProjectRaven.dto.project;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Getter;
 
-@Getter
-public class ProjectCreateRequest {
 
+public record ProjectCreateRequest (
     @NotBlank
     @Size(min = 3, max = 100)
-    private String name;
+    String name,
 
-    @Size(max = 500)
-    private String description;
-}
+    @Size(max = 500) String description
+){}

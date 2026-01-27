@@ -35,5 +35,5 @@ public class User extends BaseEntity{
         @Column(name = "system_role", nullable = false, length = 20)
         private SystemRole systemRole;
 
-        protected User() {}
+        public User() {}
 }

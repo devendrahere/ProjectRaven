@@ -2,6 +2,7 @@ package com.projectraven.ProjectRaven.service;
 
 import com.projectraven.ProjectRaven.dto.project.ProjectCreateRequest;
 import com.projectraven.ProjectRaven.dto.project.ProjectSummary;
+import com.projectraven.ProjectRaven.dto.user.UserSummary;
 import com.projectraven.ProjectRaven.emums.ProjectRole;
 import com.projectraven.ProjectRaven.entity.Projects;
 
@@ -22,6 +23,12 @@ public interface ProjectService {
             Long userIdToAdd,
             ProjectRole role
     );
+
+    List<UserSummary> getProjectMembers(
+            Long projectId,
+            Long actorId
+    );
+
 
     void changeProjectMemberRole(
             Long projectId,

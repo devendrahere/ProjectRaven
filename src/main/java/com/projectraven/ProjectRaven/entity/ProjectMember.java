@@ -33,5 +33,5 @@ public class ProjectMember extends  BaseEntity{
         @Column(nullable = false, length = 20)
         private ProjectRole ProjectRole;
 
-        protected ProjectMember() {}
+        public ProjectMember() {}
 }

@@ -48,5 +48,5 @@ public class Issue extends BaseEntity{
     @Column(nullable = false)
     private Boolean deleted = false;
 
-    protected Issue() {}
+    public Issue() {}
 }

@@ -8,6 +8,7 @@ public class ProjectRavenApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ProjectRavenApplication.class, args);
+		System.out.println("Project Raven is running...");
 	}
 
 }

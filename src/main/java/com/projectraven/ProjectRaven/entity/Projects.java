@@ -27,5 +27,5 @@ public class Projects  extends  BaseEntity{
         @JoinColumn(name = "created_by", nullable = false)
         private User createdBy;
 
-        protected Projects(){}
+        public Projects(){}
 }
