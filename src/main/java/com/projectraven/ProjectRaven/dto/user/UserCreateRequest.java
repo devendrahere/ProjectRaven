@@ -8,7 +8,7 @@ public record UserCreateRequest (
 
     @NotBlank
     @Size(min = 3, max = 50)
-    String username,
+    String name,
 
     @NotBlank
     @Size(min = 8, max = 100)

@@ -22,7 +22,7 @@ public class IssueController {
     @PostMapping("/projects/{projectId}/issues")
     @ResponseStatus(HttpStatus.CREATED)
     public IssueResponse createIssue(
-            @RequestParam Long projectId,
+            @PathVariable  Long projectId,
             @RequestBody IssueCreateRequest request,
             Authentication authentication
     ) {

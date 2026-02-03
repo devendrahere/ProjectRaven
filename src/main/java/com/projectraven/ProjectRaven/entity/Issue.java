@@ -27,7 +27,7 @@ public class Issue extends BaseEntity{
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
-    private IssueStatus status;
+    private IssueStatus status= IssueStatus.OPEN;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
@@ -37,7 +37,7 @@ public class Issue extends BaseEntity{
     @JoinColumn(name = "project_id", nullable = false)
     private Projects project;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "assignee_id")
     private User assignee;
 

@@ -14,7 +14,11 @@ import com.projectraven.ProjectRaven.repository.ProjectRepository;
 import com.projectraven.ProjectRaven.repository.UserRepository;
 import com.projectraven.ProjectRaven.service.ProjectService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -26,6 +30,7 @@ public class ProjectServiceImpl implements ProjectService {
     private final ProjectMemberRepository projectMemberRepository;
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public ProjectSummary createProject(ProjectCreateRequest request, Long actorId) {
         User owner = userRepository.findById(actorId)
@@ -131,22 +136,31 @@ public class ProjectServiceImpl implements ProjectService {
 
     private void requireProjectOwner(Long projectId, Long userId) {
         ProjectMember projectMember =projectMemberRepository.findByProjectIdAndUserId(projectId, userId)
-                .orElseThrow(() -> new RuntimeException("User is not a member of the project"));
+                .orElseThrow(() -> new AccessDeniedException("User is not a project member"));
+
         if (projectMember.getProjectRole() != ProjectRole.OWNER) {
-            throw new RuntimeException("User is not the owner of the project");
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "User is not the owner of the project"
+            );
+
         }
     }
 
     private void requireProjectOwnerOrManager(Long projectId, Long userId) {
         ProjectMember projectMember=projectMemberRepository.findByProjectIdAndUserId(projectId, userId)
-                .orElseThrow(() -> new RuntimeException("User is not a member of the project"));
+                .orElseThrow(() -> new AccessDeniedException("User is not a project member"));
         if (projectMember.getProjectRole() != ProjectRole.OWNER && projectMember.getProjectRole() != ProjectRole.MANAGER) {
-            throw new RuntimeException("User is not the owner or admin of the project");
+            throw new ResponseStatusException(
+                    HttpStatus.FORBIDDEN,
+                    "User is not the owner or manager of the project"
+            );
+
         }
     }
 
     private void requiredProjectMember(Long projectId, Long userId) {
         projectMemberRepository.findByProjectIdAndUserId(projectId, userId)
-                .orElseThrow(() -> new RuntimeException("User is not a member of the project"));
+                .orElseThrow(() -> new AccessDeniedException("User is not a project member"));
     }
 }
